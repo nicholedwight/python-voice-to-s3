@@ -33,7 +33,6 @@ def get_message_store():
     for record in response.json().records:
         # All records have attachments which is the actual data, we're going to check the type for VM
         for attachment in record.attachments:
-            print(attachment.type)
             # There are audiorecording and audio transcription attachment types for VM, we're only interested in the recording
             if attachment.type == "AudioRecording":
                 # Setting a filename to use when we fetch the content from attachment uri
