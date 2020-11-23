@@ -22,12 +22,13 @@ def get_message_store():
         for attachment in record.attachments:
             # There are audiorecording and audio transcription attachment types, we're only interested in the recording
             if attachment.type == "AudioRecording":
+                print(attachment.contentType)
                 if record.type == "VoiceMail":
-                    fileName = "{record.attachments[0].id}.mp3"
-            
+                    fileName = ("vm-%s.id.mp3" % record.attachments[0].id)
+
             # Now we're going to save the mp3
             content = platform.get(f'{attachment.uri}')
-            file = open("/content{fileName}", "w")
+            file = open(("%s" % fileName), "wb")
             file.write(content.body())
             file.close
 
